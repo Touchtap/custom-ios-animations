@@ -32,11 +32,50 @@ class WorkshopViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.backItem?.title = ""
+        self.title = "Workshop"
+    }
+    
+    func toggleRefresh(show: Bool = true) {
+        if show {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(ChainingViewController.refresh))
+        }
+        else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        resetForAnimations()
+        executeAnimations()
+    }
+    
+    func refresh() {
+        toggleRefresh(show: false)
+        
+        resetForAnimations()
+        executeAnimations()
+    }
+    
+    func resetForAnimations() {
+        animator = UIDynamicAnimator(referenceView: self.view)
+        
+        gravity = UIGravityBehavior()
+        gravity.magnitude = gravity.magnitude * 3
+        
+        collider = UICollisionBehavior()
+        collider.translatesReferenceBoundsIntoBoundary = true
+        
+        dynamicBehavior = UIDynamicItemBehavior()
+        dynamicBehavior.elasticity = 0.25
+
+        
+        self.animatedSquare.alpha = 0
+        self.animatedSquare.center = self.view.center
+    }
+    
+    func executeAnimations() {
         // 13 Total Animations
         
         self.animateFadeIn {
@@ -51,7 +90,9 @@ class WorkshopViewController: UIViewController {
                                         self.animateChangeColor(color: .blue) {
                                             self.animateChangeColor(color: .purple) {
                                                 self.animateChangeColor(color: .lightGray) {}
-                                                self.animateGrowAndShrink {}
+                                                self.animateGrowAndShrink {
+                                                    self.toggleRefresh(show: true)
+                                                }
                                             }
                                         }
                                     }

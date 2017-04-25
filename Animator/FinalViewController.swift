@@ -22,17 +22,6 @@ class FinalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        animator = UIDynamicAnimator(referenceView: self.view)
-        
-        gravity = UIGravityBehavior()
-        gravity.magnitude = gravity.magnitude * 3
-        
-        collider = UICollisionBehavior()
-        collider.translatesReferenceBoundsIntoBoundary = true
-        
-        dynamicBehavior = UIDynamicItemBehavior()
-        dynamicBehavior.elasticity = 0.25
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,11 +32,49 @@ class FinalViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.backItem?.title = ""
+        self.title = "Final"
+    }
+    
+    func toggleRefresh(show: Bool = true) {
+        if show {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(ChainingViewController.refresh))
+        }
+        else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        resetForAnimations()
+        executeAnimations()
+    }
+    
+    func refresh() {
+        toggleRefresh(show: false)
+        
+        resetForAnimations()
+        executeAnimations()
+    }
+    
+    func resetForAnimations() {        
+        animator = UIDynamicAnimator(referenceView: self.view)
+        
+        gravity = UIGravityBehavior()
+        gravity.magnitude = gravity.magnitude * 3
+        
+        collider = UICollisionBehavior()
+        collider.translatesReferenceBoundsIntoBoundary = true
+        
+        dynamicBehavior = UIDynamicItemBehavior()
+        dynamicBehavior.elasticity = 0.25
+
+        self.animatedSquare.alpha = 0
+        self.animatedSquare.center = self.view.center
+    }
+    
+    func executeAnimations() {
         // 13 Total Animations
         
         self.animateFadeIn {
@@ -57,12 +84,15 @@ class FinalViewController: UIViewController {
                         self.animateDropAndSpringBounce {
                             self.animateCenter {
                                 self.animateDropAndBounceLightly {
-                                    self.animateCenter {}
-                                    self.animateChangeColor(color: .red) {
-                                        self.animateChangeColor(color: .blue) {
-                                            self.animateChangeColor(color: .purple) {
-                                                self.animateChangeColor(color: .lightGray) {}
-                                                self.animateGrowAndShrink {}
+                                    self.animateCenter {
+                                        self.animateChangeColor(color: .red) {
+                                            self.animateChangeColor(color: .blue) {
+                                                self.animateChangeColor(color: .purple) {
+                                                    self.animateChangeColor(color: .lightGray) {}
+                                                    self.animateGrowAndShrink {
+                                                        self.toggleRefresh(show: true)
+                                                    }
+                                                }
                                             }
                                         }
                                     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cheetah
 
 class ChainingViewController: UIViewController {
 
@@ -43,35 +44,75 @@ class ChainingViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.backItem?.title = ""
+        self.title = "Chaining"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        resetForAnimations()
+        executeAnimations()
+    }
+    
+    func toggleRefresh(show: Bool = true) {
+        if show {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(ChainingViewController.refresh))
+        }
+        else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    func refresh() {
+        toggleRefresh(show: false)
+        
+        resetForAnimations()
+        executeAnimations()
+    }
+    
+    func resetForAnimations() {
+        self.animatedSquare.alpha = 0
+        self.animatedSquare.center = self.view.center
+    }
+    
+    func executeAnimations() {
+        
         // 13 Total Animations
         
-//        self.animateFadeIn {
-//            self.animateSpin {
-//                self.animateHardDrop {
-//                    self.animateCenter {
-//                        self.animateDropAndSpringBounce {
-//                            self.animateCenter {
-//                                self.animateDropAndBounceLightly {
-//                                    self.animateCenter {}
-//                                    self.animateChangeColor(color: .red) {
-//                                        self.animateChangeColor(color: .blue) {
-//                                            self.animateChangeColor(color: .purple) {
-//                                                self.animateChangeColor(color: .lightGray) {}
-//                                                self.animateGrowAndShrink {}
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        let asFrame = self.animatedSquare.frame
+        let yChangeToBottom = UIScreen.main.bounds.height - asFrame.size.height - asFrame.origin.y
+        
+        self.animatedSquare.cheetah
+            .alpha(1.0).duration(sharedDuration)
+            .wait(0.5)
+            .rotate(Double.pi * 5.0).duration(sharedDuration / 1.5)
+            .wait(0.01)
+            .move(0, yChangeToBottom).duration(sharedDuration / 5)
+            .wait(0.25)
+            .move(0,-yChangeToBottom).duration(sharedDuration * 2)
+            .wait(0.5)
+            .move(0, yChangeToBottom).duration(sharedDuration / 5).spring().duration(sharedDuration / 1.5)
+            .wait(0.25)
+            .move(0,-yChangeToBottom).duration(sharedDuration * 2)
+            .wait(0.25)
+            .move(0, yChangeToBottom).duration(sharedDuration / 2).easeOutBounce
+            .wait(0.25)
+            .move(0,-yChangeToBottom).duration(sharedDuration * 2)
+            .wait()
+            .backgroundColor(.red).duration(sharedDuration / 4)
+            .wait()
+            .backgroundColor(.blue).duration(sharedDuration / 4)
+            .wait()
+            .backgroundColor(.purple).duration(sharedDuration / 4)
+            .wait()
+            .backgroundColor(.lightGray).duration(sharedDuration / 4)
+            .wait()
+            .delay(0.25).scaleXY(1.5, 1.5).duration(sharedDuration / 4)
+            .wait()
+            .delay(0.25).scaleXY(1.0, 1.0).duration(sharedDuration / 4)
+            .run()
+            .completion {
+                self.toggleRefresh(show: true)
+            }
     }
 }

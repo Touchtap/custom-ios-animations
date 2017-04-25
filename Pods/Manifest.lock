@@ -1,9 +1,11 @@
 PODS:
+  - Cheetah (0.4.1)
   - Dance (1.0.7)
   - pop (1.0.9)
   - Spring (1.0.3)
 
 DEPENDENCIES:
+  - Cheetah
   - Dance
   - pop
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
@@ -19,10 +21,11 @@ CHECKOUT OPTIONS:
     :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
+  Cheetah: 14e1eff625b9e02ffa8d3fd1157236d6f20d71be
   Dance: c770d6923252e9b0ffcce98cc1303c5ac504c319
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
 
-PODFILE CHECKSUM: 7b8f823f194842d865e2c976d4b38976c3c82c4d
+PODFILE CHECKSUM: 82d55c77abe09568721636cca3a788962de09c19
 
 COCOAPODS: 1.1.1
