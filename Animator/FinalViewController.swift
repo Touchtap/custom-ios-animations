@@ -140,6 +140,17 @@ class FinalViewController: UIViewController {
     }
     
     func animateDropAndBounceLightly(doNextAnimation: @escaping (Void)->Void) {
+        animator = UIDynamicAnimator(referenceView: self.view)
+        
+        gravity = UIGravityBehavior()
+        gravity.magnitude = gravity.magnitude * 3
+        
+        collider = UICollisionBehavior()
+        collider.translatesReferenceBoundsIntoBoundary = true
+        
+        dynamicBehavior = UIDynamicItemBehavior()
+        dynamicBehavior.elasticity = 0.25
+        
         animator.addBehavior(gravity)
         animator.addBehavior(collider)
         animator.addBehavior(dynamicBehavior)

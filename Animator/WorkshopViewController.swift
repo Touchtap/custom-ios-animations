@@ -73,15 +73,15 @@ class WorkshopViewController: UIViewController {
     }
     
     func animateFadeIn(doNextAnimation: @escaping (Void)->Void) {
-
+        
     }
     
     func animateSpin(doNextAnimation: @escaping (Void)->Void) {
-
+        
     }
     
     func animateHardDrop(doNextAnimation: @escaping (Void)->Void) {
-
+        
     }
     
     func animateCenter(doNextAnimation: @escaping (Void)->Void) {
@@ -133,7 +133,6 @@ class WorkshopViewController: UIViewController {
         
         dynamicBehavior = UIDynamicItemBehavior()
         dynamicBehavior.elasticity = 0.25
-        
         
         self.animatedSquare.alpha = 0
         self.animatedSquare.center = self.view.center
