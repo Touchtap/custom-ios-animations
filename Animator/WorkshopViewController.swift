@@ -52,13 +52,14 @@ class WorkshopViewController: UIViewController {
                         self.animateDropAndSpringBounce {
                             self.animateCenter {
                                 self.animateDropAndBounceLightly {
-                                    self.animateCenter {}
-                                    self.animateChangeColor(color: .red) {
-                                        self.animateChangeColor(color: .blue) {
-                                            self.animateChangeColor(color: .purple) {
-                                                self.animateChangeColor(color: .lightGray) {}
-                                                self.animateGrowAndShrink {
-                                                    self.toggleRefresh(show: true)
+                                    self.animateCenter {
+                                        self.animateChangeColor(color: .red) {
+                                            self.animateChangeColor(color: .blue) {
+                                                self.animateChangeColor(color: .purple) {
+                                                    self.animateChangeColor(color: .lightGray) {}
+                                                    self.animateGrowAndShrink {
+                                                        self.toggleRefresh(show: true)
+                                                    }
                                                 }
                                             }
                                         }
