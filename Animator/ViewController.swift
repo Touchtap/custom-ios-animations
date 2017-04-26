@@ -67,7 +67,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
             break
         case 2:
             cell.textLabel?.text = "Animation Chaining"
-            cell.detailTextLabel?.text = "Same animations, less code (with Dance & Pop)."
+            cell.detailTextLabel?.text = "Same animations, less code (Cheetah)."
             break
         default:
             break
