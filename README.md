@@ -1,7 +1,11 @@
-# custom-ios-animations
-Squares Conference 2017 - Custom iOS Animations Workshop
+# Custom iOS Animations Workshop
+Squares Conference 2017
+www.squaresconference.com
+
+
 
 Base project for the Custom iOS Animations workshop, given by Noah Labhart on April 26, 2017. 
+https://noahlabhart.com
 
 Link to Slide Deck
 https://noahlabhart.com/wp-content/uploads/2017/04/squares-2017-custom-ios-animations.pdf
