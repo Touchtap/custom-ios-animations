@@ -2,7 +2,7 @@
 Squares Conference 2017
 www.squaresconference.com
 
-
+![Screenshot](animation.gif)
 
 Base project for the Custom iOS Animations workshop, given by Noah Labhart on April 26, 2017. 
 https://noahlabhart.com
